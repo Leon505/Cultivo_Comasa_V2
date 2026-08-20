@@ -1,0 +1,22 @@
+{
+    "name": "Cultivo COMASA",
+    "short_name": "Cultivo COMASA",
+    "description": "App para evaluación de cultivo COMASA",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#FAFAF5",
+    "theme_color": "#005B28",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "LOGO.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "LOGO.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cultivo COMASA</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#005B28">
+    <link rel="apple-touch-icon" href="LOGO.png">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for better typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Header -->
+    <header id="main-header">
+        <div class="header-content">
+            <button id="btn-back" class="hidden">&#8592;</button>
+            <div id="header-title-container">
+                <svg id="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-8m0 0V4m0 8h8m-8 0H4"></path><path d="M4 12c0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8-8-3.582-8-8z" stroke="none" fill="white" opacity="0.2"/></svg>
+                <h1 id="header-title">EVALUACIÓN DEL CULTIVO</h1>
+            </div>
+            <div id="header-distancia" class="hidden">
+                <span class="lbl">Distancia de Siembra:</span>
+                <span class="val" id="header-distancia-val">7,683 mts/lineales</span>
+                <svg class="edit-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+            </div>
+        </div>
+    </header>
+
+    <!-- Pantalla 1: Configuración de Distancia -->
+    <main id="screen1" class="screen active">
+        <div class="center-content">
+            <div class="logo-container">
+                <img src="LOGO.png" alt="Logo" class="main-logo" onerror="this.style.display='none'">
+            </div>
+            <h2 class="section-title">DISTANCIA DE SIEMBRA</h2>
+            <p class="subtitle">mts / Lineales</p>
+
+            <div class="card card-input">
+                <label>Distancia de Siembra<br>mts / Lineales:</label>
+                <div class="input-spinner-container">
+                    <input type="number" id="input-distancia" value="7683" inputmode="numeric">
+                </div>
+            </div>
+
+            <div class="info-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                <p>Este valor se utilizará para calcular PLTS/MZ al final del formulario.</p>
+            </div>
+
+            <button id="btn-screen1-next" class="btn-primary">
+                &#10003; CONFIRMAR Y CONTINUAR
+            </button>
+        </div>
+    </main>
+
+    <!-- Pantalla 2: Captura de Datos -->
+    <main id="screen2" class="screen">
+        <div class="screen-subtitle">Ingrese los datos de las 5 estaciones</div>
+        
+        <div class="table-container">
+            <table id="capture-table">
+                <thead>
+                    <tr>
+                        <th>PARÁMETRO</th>
+                        <th>E1</th>
+                        <th>E2</th>
+                        <th>E3</th>
+                        <th>E4</th>
+                        <th>E5</th>
+                    </tr>
+                </thead>
+                <tbody id="capture-tbody">
+                    <!-- Filas generadas por JS -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="action-buttons">
+            <button id="btn-limpiar" class="btn-secondary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
+                LIMPIAR TODO
+            </button>
+            <button id="btn-ver-resultados" class="btn-primary-small">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                VER RESULTADOS
+            </button>
+        </div>
+        <div class="swipe-hint">
+            <p>Deslice horizontalmente para ver todas las columnas &#8596;</p>
+        </div>
+    </main>
+
+    <!-- Pantalla 3: Resultados -->
+    <main id="screen3" class="screen">
+        <div class="screen-subtitle">Formulario completo con cálculos</div>
+        
+        <div class="table-container table-results">
+            <table id="results-table">
+                <thead>
+                    <tr>
+                        <th>PARÁMETRO</th>
+                        <th>E1</th>
+                        <th>E2</th>
+                        <th>E3</th>
+                        <th>E4</th>
+                        <th>E5</th>
+                        <th class="col-calc">SUMA</th>
+                        <th class="col-calc">PROM</th>
+                        <th class="col-calc">PLTS/MZ</th>
+                    </tr>
+                </thead>
+                <tbody id="results-tbody">
+                    <!-- Filas generadas por JS -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="action-buttons results-actions">
+            <button id="btn-nueva-eval" class="btn-secondary">
+                &#8592; NUEVA EVALUACIÓN
+            </button>
+            <button id="btn-recalcular" class="btn-secondary-outline">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>
+                RECALCULAR
+            </button>
+        </div>
+        <div class="swipe-hint">
+            <p>Deslice horizontalmente para ver todas las columnas &#8596;</p>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
