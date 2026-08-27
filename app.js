@@ -240,11 +240,20 @@ document.getElementById('btn-recalcular').addEventListener('click', () => {
     showScreen(2);
 });
 
-// Service Worker Registration for PWA
+// Service Worker Registration for PWA y Auto-Recarga
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js')
             .then(reg => console.log('Service Worker registrado', reg))
             .catch(err => console.error('Error al registrar Service Worker', err));
+    });
+
+    // NUEVO: Detecta cuando el sw.js cambia y refresca la app automáticamente para todos los usuarios
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!refreshing) {
+            refreshing = true;
+            window.location.reload();
+        }
     });
 }
