@@ -247,10 +247,18 @@ th:first-child {
     color: var(--primary-green);
     z-index: 3;
 }
-/* Subtle row striping */
-tbody tr:nth-child(even) td:first-child {
-    background-color: #f9f9f9;
+/* Intercalado de colores para TODAS las columnas (Pares vs Impares) */
+
+/* 1. Filas IMPARES: Fondo blanco */
+tbody tr:nth-child(odd) td {
+    background-color: #ffffff;
 }
+
+/* 2. Filas PARES: Fondo gris claro para el patrón intermitente */
+tbody tr:nth-child(even) td {
+    background-color: #f2f2f2; 
+}
+
 
 td input {
     width: 45px;
@@ -306,7 +314,7 @@ td input[readonly] {
 .table-results th { 
     color: #000000; /* Esto los pondrá de color negro */
 }
-.col-calc { background-color: #f0f4f1; }
+.col-calc { background-color: #d3ebd9; } /*1. verde tierno en cabecera */
 .val-plts { color: var(--plts-text); font-weight: 700; }
 
 .results-actions { padding: 15px; }
@@ -316,4 +324,13 @@ td input[readonly] {
     border: none;
     font-size: 14px;
     padding: 12px;
+}
+/* Estilos para las últimas 3 columnas de la tabla de resultados (SUMA, PROM, PLTS/MZ) */  /*2. negrilla en resultados */
+.table-results td:nth-last-child(3), /* Columna SUMA */
+.table-results td:nth-last-child(2), /* Columna PROM */
+.table-results td:nth-last-child(1) { /* Columna PLTS/MZ */
+    
+    /*background-color: #e8f5e9; /* Cambia el color de fondo (aquí un verde muy claro) */
+    /*color: #000000;            /* Cambia el color del texto (aquí negro) */
+    font-weight: 600;          /* Opcional: hace los números un poco más gruesos */
 }
