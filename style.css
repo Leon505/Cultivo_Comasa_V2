@@ -41,8 +41,8 @@ body {
     align-items: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
-
 .header-content {
+    position: relative; /* Permite centrar el título con respecto a toda la barra */
     width: 100%;
     padding: 0 15px;
     display: flex;
@@ -51,9 +51,13 @@ body {
 }
 
 #header-title-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     align-items: center;
     gap: 10px;
+    white-space: nowrap;
 }
 #header-title { font-size: 16px; font-weight: 700; }
 #header-icon { width: 24px; height: 24px; }
@@ -333,4 +337,12 @@ td input[readonly] {
     /*background-color: #e8f5e9; /* Cambia el color de fondo (aquí un verde muy claro) */
     /*color: #000000;            /* Cambia el color del texto (aquí negro) */
     font-weight: 600;          /* Opcional: hace los números un poco más gruesos */
+}
+/* Letras blancas para los encabezados E1 a E5 en la pantalla de Resultados */
+#screen3 thead th:nth-child(2),
+#screen3 thead th:nth-child(3),
+#screen3 thead th:nth-child(4),
+#screen3 thead th:nth-child(5),
+#screen3 thead th:nth-child(6) {
+    color: #ffffff;
 }
