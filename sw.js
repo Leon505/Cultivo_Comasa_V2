@@ -7,6 +7,8 @@ const urlsToCache = [
     './app.js',
     './manifest.json',
     './LOGO.png'
+    './icon-192x192.png',  // <-- AGREGAR
+    './icon-512x512.png'   // <-- AGREGAR
 ];
 
 // Evento de instalación: Fuerza al nuevo Service Worker a instalarse de inmediato
