@@ -6,7 +6,7 @@ const urlsToCache = [
     './style.css',
     './app.js',
     './manifest.json',
-    './LOGO.png'
+    './LOGO.png',
     './icon-192x192.png',  // <-- AGREGAR
     './icon-512x512.png'   // <-- AGREGAR
 ];
