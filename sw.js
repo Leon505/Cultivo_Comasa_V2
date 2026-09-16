@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cultivo-comasa-v5'; // Pasamos a la versión 5
+const CACHE_NAME = 'cultivo-comasa-v6'; // Pasamos a la versión 6
 
 const urlsToCache = [
     './',
