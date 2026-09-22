@@ -1,48 +1,65 @@
-const CACHE_NAME = 'cultivo-comasa-v6'; // Pasamos a la versión 6
+// Aumentamos la versión a v7 para forzar a los celulares a reinstalar la memoria
+const CACHE_NAME = 'cultivo-comasa-v7'; 
 
 const urlsToCache = [
-    './',
-    './index.html',
-    './style.css',
-    './app.js',
-    './manifest.json',
-    './LOGO.png',
-    './icon-192x192.png',  // <-- AGREGAR
-    './icon-512x512.png'   // <-- AGREGAR
+  './',
+  './index.html',
+  './style.css',
+  './app.js',
+  './manifest.json',
+  './LOGO.png', // VERIFICA: Debe coincidir exactamente con el nombre en GitHub (mayúsculas/minúsculas)
+  './icon-192x192.png',
+  './icon-512x512.png'
 ];
 
-// Evento de instalación: Fuerza al nuevo Service Worker a instalarse de inmediato
+// 1. Instalación blindada: guarda archivo por archivo con manejo de errores
 self.addEventListener('install', event => {
-    self.skipWaiting(); // <-- NUEVO: No espera a que cierres la app
-    event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then(cache => cache.addAll(urlsToCache))
-    );
+  self.skipWaiting();
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(async cache => {
+      for (const url of urlsToCache) {
+        try {
+          await cache.add(url);
+        } catch (err) {
+          console.error('Error guardando en caché:', url, err);
+        }
+      }
+    })
+  );
 });
 
-// Evento de activación (NUEVO): Borra la caché vieja para liberar espacio y toma el control
+// 2. Activación: Borra la memoria antigua y toma el control de inmediato
 self.addEventListener('activate', event => {
-    event.waitUntil(
-        caches.keys().then(cacheNames => {
-            return Promise.all(
-                cacheNames.map(cacheName => {
-                    if (cacheName !== CACHE_NAME) {
-                        console.log('Borrando caché antigua:', cacheName);
-                        return caches.delete(cacheName);
-                    }
-                })
-            );
-        }).then(() => self.clients.claim()) // <-- NUEVO: Aplica el nuevo código a las ventanas abiertas
-    );
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (cacheName !== CACHE_NAME) {
+            console.log('Borrando caché antigua:', cacheName);
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    }).then(() => self.clients.claim())
+  );
 });
 
-// Evento fetch: ESTO GARANTIZA QUE FUNCIONE SIN INTERNET (Queda igual)
+// 3. Respuesta Offline: Si no hay red, sirve los archivos desde la memoria interna
 self.addEventListener('fetch', event => {
-    event.respondWith(
-        caches.match(event.request)
-            .then(response => {
-                if (response) return response;
-                return fetch(event.request);
-            })
-    );
+  event.respondWith(
+    caches.match(event.request).then(cachedResponse => {
+      // Si el archivo está guardado en la memoria local, lo entrega de inmediato
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+      
+      // Si no está guardado, intenta buscarlo en internet
+      return fetch(event.request).catch(() => {
+        // Si no hay internet y el usuario entra a la app, entrega la pantalla principal guardada
+        if (event.request.mode === 'navigate') {
+          return caches.match('./index.html') || caches.match('./');
+        }
+      });
+    })
+  );
 });
