@@ -1,5 +1,5 @@
 // Aumentamos la versión a v7 para forzar a los celulares a reinstalar la memoria
-const CACHE_NAME = 'cultivo-comasa-v7'; 
+const CACHE_NAME = 'cultivo-comasa-v8'; 
 
 const urlsToCache = [
   './',
