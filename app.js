@@ -12,7 +12,7 @@ const parametros = [
     { id: 'roya', name: 'Roya', type: 'int' },                           // 6 - Fila 9
     { id: 'corchosis', name: 'Corchosis', type: 'int' },                 // 7 - Fila 10
     { id: 'alternaria', name: 'Alternaría', type: 'int' },               // 8 - Fila 11
-    { id: 'moho', name: 'Moho blanco', type: 'int' },                    // 9 - Fila 12
+    { id: 'moho', name: 'Moho blanco', type: 'decimal' },                    // 9 - Fila 12
     { id: 'ginoforos', name: 'No. Ginóforos/planta', type: 'int' },      // 10 - Fila 13
     { id: 'cap_peq', name: 'Cáps. pequeñas', type: 'int' },              // 11 - Fila 14
     { id: 'cap_med', name: 'Cáps. medianas', type: 'int' },              // 12 - Fila 15
